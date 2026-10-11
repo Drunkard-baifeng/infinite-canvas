@@ -2,6 +2,8 @@
 
 ## Unreleased
 
++ [调整] ZIP 与 Docker 统一由 Build and Release 流程发布，推送 main 自动构建，版本 tag 在两项成功后发布 Releases。
+
 + [新增] GitHub Actions 支持构建静态网站 ZIP，推送版本 tag 时上传 Releases，并补充 1Panel 部署说明。
 + [修复] Docker 构建与部署镜像地址切换为个人仓库，并补充主应用 latest 镜像标签。
 
