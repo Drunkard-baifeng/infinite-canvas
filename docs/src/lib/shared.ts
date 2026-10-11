@@ -9,6 +9,6 @@ export const docsContentRoute = '/llms.mdx/docs';
 export const gitConfig = {
   user: 'Drunkard-baifeng',
   repo: 'infinite-canvas',
-  branch: 'personal',
+  branch: 'main',
   docsContentDir: 'docs/content/docs',
 };

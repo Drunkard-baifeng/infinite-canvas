@@ -32,7 +32,7 @@
 ### 本地开发
 
 ```bash
-git clone -b personal https://github.com/Drunkard-baifeng/infinite-canvas.git
+git clone -b main https://github.com/Drunkard-baifeng/infinite-canvas.git
 cd infinite-canvas/web
 bun install
 bun run dev
@@ -43,7 +43,7 @@ bun run dev
 ### Docker 运行
 
 ```bash
-git clone -b personal https://github.com/Drunkard-baifeng/infinite-canvas.git
+git clone -b main https://github.com/Drunkard-baifeng/infinite-canvas.git
 cd infinite-canvas
 docker compose up -d
 ```
