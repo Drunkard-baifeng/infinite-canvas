@@ -50,6 +50,8 @@ docker compose up -d
 
 ## 文档
 
+- [1Panel 部署与 GitHub 自动构建](docs/content/docs/overview/docker.zh-CN.mdx)
+
 - [快速开始](docs/content/docs/overview/quick-start.mdx)
 - [功能介绍](docs/content/docs/overview/features.mdx)
 - [画布节点操作手册](docs/content/docs/canvas/canvas-node-manual.mdx)

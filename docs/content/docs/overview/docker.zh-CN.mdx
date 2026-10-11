@@ -5,9 +5,48 @@ description: 使用 Docker Compose 部署极速画布
 
 # Docker 部署
 
+## 1Panel 静态网站部署（推荐）
+
+主应用是 Vite 静态前端，1Panel 无需安装 Node.js、Bun 或数据库。
+
+1. 在 GitHub 仓库 Actions 中启用工作流，选择 **Web Release → Run workflow → main**。成功后下载 `jisu-canvas-web` Artifact，解开外层压缩包，取出 `jisu-canvas-web.zip`。
+2. 在 1Panel 安装 OpenResty，创建静态网站，域名填写 `image.jisuai.net`，并将域名 DNS 指向服务器。
+3. 上传并解压 `jisu-canvas-web.zip` 到网站根目录，确保根目录直接包含 `index.html`、`assets/` 和 `config.js`，不要多套一层目录。
+4. 在站点配置中修改已有的 `location /` 为以下内容（不要重复添加同名 location）：
+
+```nginx
+location / {
+    try_files $uri $uri/ /index.html;
+}
+
+location = /index.html {
+    add_header Cache-Control "no-cache";
+}
+
+location = /config.js {
+    add_header Cache-Control "no-store";
+}
+```
+
+5. 申请并启用 HTTPS，访问首页以及 `/canvas`、`/config`，刷新子页面确认路由正常。
+
+AI 请求仍由用户浏览器直连 `https://api.jisuai.net`；API 服务的 CORS 需允许网站来源 `https://image.jisuai.net`。将网页放到服务器不会消除跨域。
+
+更新时备份原网站文件，用新包覆盖，并避免让旧页面引用的静态资源立即失效；回滚使用备份。浏览器中的画布、素材和 Key 不随服务器文件部署而迁移。
+
+## GitHub 自动构建与 Releases
+
+- 推送代码到 `main` 不会自动发版。需要临时部署包时手动运行 **Web Release**，产物在该次 Actions 的 Artifacts 中。
+- 正式发版时整理 `CHANGELOG.md`、更新根目录 `VERSION`、提交代码，再创建与 `VERSION` 相同的 `v*` tag 并推送。**Web Release** 会构建并把 `jisu-canvas-web.zip` 上传到 GitHub Releases。
+- Releases 自带的 **Source code** 是源码；1Panel 静态部署使用 `jisu-canvas-web.zip`。
+- tag 同时触发现有 Docker、文档镜像、GitHub Pages 和插件发布工作流。GitHub Pages 需要单独在仓库 Settings → Pages 中配置 GitHub Actions；使用 1Panel 不依赖 Pages。
+- Docker 镜像发布到 `ghcr.io/drunkard-baifeng/infinite-canvas`，与 Releases 的 ZIP 是两种独立部署产物。首次构建和实际服务器部署仍需验证。
+
 如果你希望在自己的机器或服务器上运行项目，可以直接使用 Docker Compose。
 
 ## 使用发布镜像
+
+需先在本仓库 Actions 中成功运行 Docker image，并将 GHCR 包可见性设为 Public；首次发布前请使用下方源码构建方式。
 
 ```bash
 git clone -b main https://github.com/Drunkard-baifeng/infinite-canvas.git
@@ -49,7 +88,7 @@ docker compose -f docker-compose.local.yml up -d --build
 
 ## 数据说明
 
-当前主应用镜像只启动 Next.js。画布、我的素材、生成记录和 AI API Key 默认保存在浏览器本地；第三方提示词由浏览器前端直连拉取，不需要额外挂载数据目录。
+当前主应用镜像使用 Nginx 托管 Vite 静态产物。画布、我的素材、生成记录和 AI API Key 默认保存在浏览器本地；第三方提示词由浏览器前端直连拉取，不需要额外挂载数据目录。
 
 ## 统计分析（可选）
 
@@ -67,7 +106,7 @@ docker compose -f docker-compose.local.yml up -d --build
 ```yaml
 services:
   app:
-    image: ghcr.io/basketikun/infinite-canvas:latest
+    image: ghcr.io/drunkard-baifeng/infinite-canvas:latest
     ports:
       - "3000:3000"
     environment:
@@ -81,7 +120,7 @@ services:
 docker run -d -p 3000:3000 \
   -e ANALYTICS_GA4_ID=G-XXXXXXXXXX \
   -e ANALYTICS_BAIDU_ID=e8263761cc5c32f5f7a855b8203b965a \
-  ghcr.io/basketikun/infinite-canvas:latest
+  ghcr.io/drunkard-baifeng/infinite-canvas:latest
 ```
 
 单页应用的路由切换会自动向所有已启用的统计上报 pageview。

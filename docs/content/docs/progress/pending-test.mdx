@@ -5,6 +5,8 @@ description: Implemented changes that still need manual verification
 
 # Pending Tests
 
+- Build and deployment: manually run Web Release and deploy the ZIP from its artifact to 1Panel. Verify SPA reloads, assets and API CORS. On release, verify tag/VERSION matching, the Releases attachment and personal GHCR version/latest tags. Initial app/docs image builds and server deployment remain unverified.
+
 - Version update source: open the release dialog and check for updates. Remote VERSION and CHANGELOG.md requests should use Drunkard-baifeng/infinite-canvas on main; failed requests should still restore the bundled version and release notes.
 
 - Main branch links: verify the app documentation entry, documentation source links, security policy links and clone commands use the maintained main branch.

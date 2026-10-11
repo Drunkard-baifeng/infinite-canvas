@@ -2,6 +2,9 @@
 
 ## Unreleased
 
++ [新增] GitHub Actions 支持构建静态网站 ZIP，推送版本 tag 时上传 Releases，并补充 1Panel 部署说明。
++ [修复] Docker 构建与部署镜像地址切换为个人仓库，并补充主应用 latest 镜像标签。
+
 + [调整] 版本更新检查及远程更新日志改为读取个人仓库 Drunkard-baifeng/infinite-canvas 的 main 分支。
 
 + [调整] 个人维护版本统一使用 main 分支，更新文档入口、源码链接与克隆命令。

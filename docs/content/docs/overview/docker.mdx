@@ -7,6 +7,8 @@ description: Deploy 极速画布 with Docker Compose
 
 ## Use the published image
 
+First run Docker image successfully in this repository's Actions and make the GHCR package public. Before the first publication, use the local build instructions below.
+
 ```bash
 git clone -b main https://github.com/Drunkard-baifeng/infinite-canvas.git
 cd infinite-canvas
@@ -37,7 +39,7 @@ cd docs
 docker compose -f docker-compose.local.yml up -d --build
 ```
 
-The main application container only runs Next.js. Canvases, My Assets, generation history, and API keys are stored in the browser by default, while prompt repositories are fetched directly by the frontend. No persistent data volume is required for this data.
+The main application container serves the Vite static build with Nginx. Canvases, My Assets, generation history, and API keys are stored in the browser by default, while prompt repositories are fetched directly by the frontend. No persistent data volume is required for this data.
 
 ## Optional analytics
 
@@ -51,7 +53,7 @@ No analytics are enabled by default. A deployment can enable GA4, Baidu Analytic
 ```yaml
 services:
   app:
-    image: ghcr.io/basketikun/infinite-canvas:latest
+    image: ghcr.io/drunkard-baifeng/infinite-canvas:latest
     ports:
       - "3000:3000"
     environment:
