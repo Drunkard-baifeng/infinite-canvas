@@ -5,7 +5,7 @@ description: 当前版本已实现但仍需人工验证的变更项
 
 # 待测试
 
-- GitHub Pages：未配置 Pages 时推送版本 tag 不应再触发失败任务；如以后需要 Pages，先在仓库 Settings → Pages 中选择 GitHub Actions，再手动运行该工作流。
+- GitHub Pages：在仓库 Settings → Pages 中将 Source 设为 GitHub Actions，重跑失败的 v0.20.1 Pages 任务，确认部署成功且站点可访问；后续版本 tag 应继续自动触发 Pages 部署。
 
 - v0.20.1 发布：验证个人仓库插件源可加载、插件默认打开 image.jisuai.net、文档体验和源码链接均指向个人版本；确认上游 npm Agent/Proxy 命令仍可使用。统一流程应先发布 plugins-dist 再发布镜像，版本 tag 生成 Releases ZIP。网页和服务器实测仍待完成。
 

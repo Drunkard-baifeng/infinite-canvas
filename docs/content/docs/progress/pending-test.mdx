@@ -5,7 +5,7 @@ description: Implemented changes that still need manual verification
 
 # Pending Tests
 
-- GitHub Pages: when Pages is not configured, a version tag should no longer trigger a failing Pages run. If Pages is needed later, select GitHub Actions in repository Pages settings before manually running this workflow.
+- GitHub Pages: set Source to GitHub Actions in repository Settings → Pages, rerun the failed v0.20.1 Pages run and verify the deployed site. Future version tags should continue triggering Pages deployment automatically.
 
 - v0.20.1 release: verify the fork plugin registry, image.jisuai.net plugin launch URL and fork documentation links. Upstream npm Agent/Proxy commands remain in use. Verify plugins-dist publication precedes Docker publication and the version tag produces a Release ZIP; browser and server acceptance remain pending.
 

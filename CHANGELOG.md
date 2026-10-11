@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-+ [修复] 未启用 GitHub Pages 时不再随版本 tag 自动触发 Pages 构建，避免 404 配置错误影响发版状态。
++ [调整] 恢复 GitHub Pages 随版本 tag 自动部署，并补充仓库启用 Pages 与失败任务重跑说明。
 
 ## v0.20.1
 

@@ -57,7 +57,7 @@ GitHub 负责构建和发布，服务器不会自动更新容器。镜像构建�
 - 推送代码到 `main` 会自动运行 **Build and Release**，构建 ZIP 并推送 Docker latest 镜像。ZIP 位于本次运行的 Artifacts；镜像位于 Packages。main 构建不创建正式 Releases。
 - 正式发版时整理 `CHANGELOG.md`、更新根目录 `VERSION`、提交代码，再创建与 `VERSION` 相同的 `v*` tag 并推送。**Build and Release** 在 ZIP 与 Docker 均成功后，把 `jisu-canvas-web.zip` 上传到 GitHub Releases。
 - Releases 自带的 **Source code** 是源码；1Panel 静态部署使用 `jisu-canvas-web.zip`。
-- 统一流程会先发布节点插件，再发布 Docker 镜像；tag 另行触发文档镜像；GitHub Pages 仅手动触发。GitHub Pages 需要单独在仓库 Settings → Pages 中配置 GitHub Actions；使用 1Panel 不依赖 Pages。
+- 统一流程会先发布节点插件，再发布 Docker 镜像；tag 另行触发文档镜像和 GitHub Pages。首次部署 Pages，进入仓库 Settings → Pages → Build and deployment，将 Source 设为 GitHub Actions。启用后，在失败的 GitHub Pages 运行详情右上角选择 Re-run jobs → Re-run all jobs；后续版本 tag 自动部署。默认站点地址为 `https://drunkard-baifeng.github.io/infinite-canvas/`，与 1Panel 部署独立。
 - Docker 镜像发布到 `ghcr.io/drunkard-baifeng/infinite-canvas`，与 Releases 的 ZIP 是两种独立部署产物。原有独立构建已成功，统一流程与实际服务器部署仍需验证。
 
 如果你希望在自己的机器或服务器上运行项目，可以直接使用 Docker Compose。
