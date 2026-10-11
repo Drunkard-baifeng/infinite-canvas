@@ -69,7 +69,7 @@ export function baseOptions(locale: string): BaseLayoutProps {
             <ArrowUpRight className="size-4" />
           </span>
         ),
-        url: 'https://canvas.best/',
+        url: 'https://image.jisuai.net/',
         external: true,
         on: 'nav',
       },

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## v0.20.1
+
++ [调整] 统一个人仓库、在线体验及插件入口，保留上游版权与已发布 npm 工具依赖。
+
 + [调整] ZIP 与 Docker 统一由 Build and Release 流程发布，推送 main 自动构建，版本 tag 在两项成功后发布 Releases。
 
 + [新增] GitHub Actions 支持构建静态网站 ZIP，推送版本 tag 时上传 Releases，并补充 1Panel 部署说明。

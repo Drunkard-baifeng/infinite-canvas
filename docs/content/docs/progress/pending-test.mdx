@@ -5,6 +5,8 @@ description: Implemented changes that still need manual verification
 
 # Pending Tests
 
+- v0.20.1 release: verify the fork plugin registry, image.jisuai.net plugin launch URL and fork documentation links. Upstream npm Agent/Proxy commands remain in use. Verify plugins-dist publication precedes Docker publication and the version tag produces a Release ZIP; browser and server acceptance remain pending.
+
 - Unified publishing: pushing main should run Build and Release automatically, producing a ZIP artifact and the Docker latest image through a reusable workflow. A matching version tag should publish a Release only after both jobs succeed; main builds should not create versioned Releases or duplicate Docker runs.
 
 - Build and deployment: manually run Build and Release and deploy the ZIP from its artifact to 1Panel. Verify SPA reloads, assets and API CORS. On release, verify tag/VERSION matching, the Releases attachment and personal GHCR version/latest tags. Initial app/docs image builds and server deployment remain unverified.
