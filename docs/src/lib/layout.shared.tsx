@@ -5,7 +5,7 @@ import { i18n } from './i18n';
 import { uiTranslations } from 'fumadocs-ui/i18n';
 
 const githubUrl = `https://github.com/${gitConfig.user}/${gitConfig.repo}`;
-const qqUrl = 'https://qm.qq.com/q/DFnKzZ807u';
+const qqUrl = 'https://wpa.qq.com/msgrd?v=3&uin=1591446524&site=qq&menu=yes';
 
 export const translations = i18n.translations().extend(uiTranslations()).add('ui', {
   en: {
@@ -84,8 +84,8 @@ export function baseOptions(locale: string): BaseLayoutProps {
       },
       {
         type: 'icon',
-        text: 'QQ',
-        label: 'QQ',
+        text: 'QQ 1591446524',
+        label: 'QQ 1591446524',
         url: qqUrl,
         external: true,
         on: 'menu',

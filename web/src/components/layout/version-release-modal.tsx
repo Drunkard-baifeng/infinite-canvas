@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { Modal, Tag, Timeline } from "antd";
 import type { TFunction } from "i18next";
 import { useTranslation } from "react-i18next";
@@ -21,9 +21,10 @@ function releaseTypeLabel(type: string, t: TFunction) {
 type VersionReleaseModalProps = {
     className?: string;
     style?: CSSProperties;
+    children?: ReactNode;
 };
 
-export function VersionReleaseModal({ className, style }: VersionReleaseModalProps) {
+export function VersionReleaseModal({ className, style, children }: VersionReleaseModalProps) {
     const { t } = useTranslation();
     const { open, setOpen, openReleaseModal, latestVersion, releases, checking, hasNewVersion, checkLatestRelease } = useVersionCheck();
 
@@ -35,9 +36,10 @@ export function VersionReleaseModal({ className, style }: VersionReleaseModalPro
                 style={style}
                 onClick={openReleaseModal}
                 title={t("version.viewUpdates")}
+                aria-label={t("version.viewUpdates")}
             >
-                <span className="relative inline-flex">
-                    {APP_VERSION}
+                <span className="relative inline-flex items-center gap-3">
+                    {children ?? APP_VERSION}
                     {hasNewVersion ? <span className="absolute -right-1.5 -top-1 size-1.5 rounded-full bg-green-500" /> : null}
                 </span>
             </button>

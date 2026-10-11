@@ -5,6 +5,18 @@ description: Implemented changes that still need manual verification
 
 # Pending Tests
 
+- Workspace refresh: check the home page in both themes and at mobile widths; verify new-canvas creation, the three studio links and image previews. Check sidebar scrolling/collapse, project selection and card actions, empty library and settings layout. The sidebar contact action should copy 1591446524; documentation contact links and security reporting should refer to the same QQ number.
+
+- Sidebar utility items: verify Agent, documentation, language, theme and version appear as vertical menu rows on desktop and in the mobile drawer. Collapsed desktop rows should retain icons and hover labels. Verify each action, release update indicators and scrolling on short screens; canvas toolbar actions should remain unchanged.
+
+- Sidebar collapse and original colors: collapse and expand the desktop sidebar, verify icon tooltips and the 极速AI link, then refresh and confirm the state persists. Pages, navigation and Ant Design components should use the original neutral colors; canvas colors should match the original theme. Verify the dark default and manual theme switching.
+
+- Sidebar navigation: verify desktop menu selection, the 极速AI link, bottom actions, independent content scrolling and resizing with Agent open. Mobile navigation should remain accessible through the drawer. Canvas editing should retain its full-screen layout, with the sidebar restored on return.
+
+- 极速AI渠道与导航：检查新用户预设、已有用户一键添加及重复点击保留配置；填写 Key 后验证模型拉取，桌面顶部导航和手机菜单外链应在新标签页打开 `https://api.jisuai.net`。
+
+- 极速画布品牌与主题：检查首页、导航、浏览器标题和文档名称；顶部应无 GitHub 入口，文档按钮指向 personal 分支文档；无已保存主题时首次打开应为浅色且不闪黑，手动切换后刷新应保留选择。
+
 The current release needs manual verification in these areas:
 
 - Saved model selection: save a canvas node with a model, then remove its provider or remove that model while another video model remains the default. Generation, retry and pending-video recovery should keep the unavailable model selected and open configuration instead of sending a request to the default or first provider. Re-selecting a valid model should allow generation. Changing only the API key on the same provider should preserve the model; switching a config node from a valid image model to video should still use the video default.

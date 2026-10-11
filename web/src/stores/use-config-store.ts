@@ -4,6 +4,7 @@ import { persist } from "zustand/middleware";
 import { nanoid } from "nanoid";
 
 import i18n from "@/i18n";
+import { JISUAI_URL } from "@/constant/env";
 
 export type ApiCallFormat = "openai" | "gemini";
 export type ModelCapability = "image" | "video" | "text" | "audio";
@@ -98,6 +99,7 @@ export const defaultConfig: AiConfig = {
                 { name: "gpt-4o-mini-tts", capability: "audio" },
             ],
         },
+        { id: "jisuai", name: "极速AI", baseUrl: JISUAI_URL, apiKey: "", apiFormat: "openai", models: [] },
     ],
     model: "default::gpt-image-2",
     imageModel: "default::gpt-image-2",

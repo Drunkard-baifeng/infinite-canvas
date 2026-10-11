@@ -1,4 +1,4 @@
-# Infinite Canvas Documentation Index
+# 极速画布 Documentation Index
 
 ## Overview
 

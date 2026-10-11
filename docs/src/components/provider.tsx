@@ -14,5 +14,5 @@ function changeLocale(locale: string) {
 }
 
 export function Provider({ locale, children }: { locale: string; children: ReactNode }) {
-  return <RootProvider i18n={{ ...i18nProvider(translations, locale), onLocaleChange: changeLocale }} search={{ SearchDialog }}>{children}</RootProvider>;
+  return <RootProvider theme={{ defaultTheme: "dark" }} i18n={{ ...i18nProvider(translations, locale), onLocaleChange: changeLocale }} search={{ SearchDialog }}>{children}</RootProvider>;
 }
