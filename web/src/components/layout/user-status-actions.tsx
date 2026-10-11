@@ -48,9 +48,6 @@ export function UserStatusActions({ className = "", showConfig = true, variant =
                 <button type="button" className={rowClass} onClick={togglePanel} aria-label={agentLabel} aria-pressed={panelOpen} title={agentLabel}>
                     <Bot />{!collapsed && <span>{agentLabel}</span>}
                 </button>
-                <a href={DOCS_URL} target="_blank" rel="noopener noreferrer" className={rowClass} aria-label={t("topNav.docs")} title={t("topNav.docs")}>
-                    <BookOpen />{!collapsed && <span>{t("topNav.docs")}</span>}
-                </a>
                 <button type="button" className={rowClass} onClick={() => void changeAppLocale(nextLocale)} aria-label={languageLabel} title={languageLabel}>
                     <Languages />{!collapsed && <span>{languageLabel}</span>}
                 </button>
