@@ -332,6 +332,8 @@ export default {
         config: "配置",
     },
     topNav: {
+        lightMode: "浅色模式",
+        darkMode: "深色模式",
         contact: "联系维护者：QQ {{qq}}（点击复制）",
         workspace: "工作空间",
         openMenu: "打开导航菜单",

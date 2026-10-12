@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ModelPicker } from "@/components/model-picker";
-import { JISUAI_URL } from "@/constant/env";
+import { JISUAI_CHANNELS } from "@/constant/env";
 import { videoResolutionOptions } from "@/components/video-settings-panel";
 import { ChannelEditorDrawer } from "@/components/layout/channel-editor-drawer";
 import { ConfigLocalProxy } from "@/components/layout/config-local-proxy";
@@ -112,10 +112,10 @@ export function AppConfigPanel({ showDoneButton = false, initialTab = "channels"
         updateChannels(config.channels.filter((channel) => channel.id !== id));
     };
 
-    const addJisuAiChannel = () => {
-        const existing = config.channels.find((channel) => channel.baseUrl.trim().replace(/\/+$/, "").replace(/\/v1$/i, "") === JISUAI_URL);
+    const addJisuAiChannel = (preset: (typeof JISUAI_CHANNELS)[number]) => {
+        const existing = config.channels.find((channel) => channel.baseUrl.trim().replace(/\/+$/, "").replace(/\/v1$/i, "") === preset.baseUrl);
         if (existing) return setEditingChannelId(existing.id);
-        const channel = createModelChannel({ name: "极速AI", baseUrl: JISUAI_URL, apiFormat: "openai" });
+        const channel = createModelChannel({ name: preset.name, baseUrl: preset.baseUrl, apiFormat: "openai" });
         updateChannels([...config.channels, channel]);
         setEditingChannelId(channel.id);
     };
@@ -199,8 +199,8 @@ export function AppConfigPanel({ showDoneButton = false, initialTab = "channels"
                             <div>
                                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                                     <div className="text-xs text-stone-500">{t("config.channels.description")}</div>
-                                    <div className="flex gap-2">
-                                        <Button type="text" icon={<Plus className="size-4" />} onClick={addJisuAiChannel}>极速AI</Button>
+                                    <div className="flex flex-wrap gap-2">
+                                        {JISUAI_CHANNELS.map((preset) => <Button key={preset.id} type="text" icon={<Plus className="size-4" />} onClick={() => addJisuAiChannel(preset)}>{preset.name}</Button>)}
                                         <Button type="primary" icon={<Plus className="size-4" />} onClick={addChannel}>
                                             {t("config.channels.add")}
                                         </Button>

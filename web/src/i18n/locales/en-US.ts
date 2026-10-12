@@ -332,6 +332,8 @@ export default {
         config: "Settings",
     },
     topNav: {
+        lightMode: "Light mode",
+        darkMode: "Dark mode",
         contact: "Contact: QQ {{qq}} (click to copy)",
         workspace: "Workspace",
         openMenu: "Open navigation menu",

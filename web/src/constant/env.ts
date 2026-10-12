@@ -1,5 +1,9 @@
 export const APP_VERSION = __APP_VERSION__ || "dev";
-export const JISUAI_URL = "https://api.jisuai.net";
+export const JISUAI_URL = "https://jisuai.net";
+export const JISUAI_CHANNELS = [
+    { id: "jisuai-text", name: "极速AI-文本", baseUrl: "https://jisuai.net" },
+    { id: "jisuai-image", name: "极速AI-生图", baseUrl: "https://api.jisuai.net" },
+];
 export const CONTACT_QQ = "1591446524";
 
 export const DOCS_URL = import.meta.env.VITE_DOC_URL || "https://github.com/Drunkard-baifeng/infinite-canvas/tree/main/docs/content/docs";

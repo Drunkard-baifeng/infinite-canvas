@@ -5,6 +5,12 @@ description: Implemented changes that still need manual verification
 
 # Pending Tests
 
+- v1.0.1 release: verify the UI version, release notes, Release ZIP and Docker v1.0.1/latest images include the sidebar and default channel changes.
+
+- Sidebar footer: verify QQ is absent and theme switching stays above collapse while the menu scrolls. Verify 48px desktop bottom padding and menu icons and labels shifted right together by 8px with their original spacing. Collapsed mode retains centered icons and tooltips; the mobile drawer has a theme switch in its footer.
+
+- JisuAI channels: fresh settings should list text and image providers using https://jisuai.net and https://api.jisuai.net, without dashboard links on the cards. Existing settings can add each preset without overwriting keys/models on repeated clicks. Verify model fetching after entering keys and the jisuai.net navigation link on desktop/mobile.
+
 - v1.0.0: documentation should be absent from expanded/collapsed sidebar and mobile drawer. The release dialog should show only one v1.0.0 entry, both bundled and remotely fetched. Verify v1.0.0 in the app, Release ZIP and Docker version tag.
 
 - GitHub Pages: set Source to GitHub Actions in repository Settings → Pages, rerun the failed v0.20.1 Pages run and verify the deployed site. Future version tags should continue triggering Pages deployment automatically.

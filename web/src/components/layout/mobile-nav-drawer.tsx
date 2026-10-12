@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { navigationTools, type NavigationToolSlug } from "@/constant/navigation-tools";
 import { cn } from "@/lib/utils";
 import { UserStatusActions } from "@/components/layout/user-status-actions";
+import { SidebarThemeToggle } from "@/components/layout/sidebar-theme-toggle";
 
 type MobileNavDrawerProps = {
     open: boolean;
@@ -18,7 +19,7 @@ export function MobileNavDrawer({ open, activeToolSlug, onClose }: MobileNavDraw
     const { t } = useTranslation();
 
     return (
-        <Drawer title={t("topNav.navigation")} placement="left" size={280} open={open} onClose={onClose} className="md:hidden">
+        <Drawer title={t("topNav.navigation")} placement="left" size={280} open={open} onClose={onClose} className="md:hidden" footer={<SidebarThemeToggle />}>
             <div className="space-y-1">
                 {navigationTools.map((tool) => {
                     const Icon = tool.icon;
@@ -29,7 +30,7 @@ export function MobileNavDrawer({ open, activeToolSlug, onClose }: MobileNavDraw
                             to={`/${tool.slug}`}
                             onClick={onClose}
                             className={cn(
-                                "flex items-center gap-3 rounded-lg px-3 py-3 text-base transition",
+                                "flex items-center gap-3 rounded-lg pl-5 pr-3 py-3 text-base transition",
                                 active ? "bg-accent font-medium text-accent-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground",
                             )}
                         >
@@ -38,7 +39,7 @@ export function MobileNavDrawer({ open, activeToolSlug, onClose }: MobileNavDraw
                         </Link>
                     );
                 })}
-                <a href={JISUAI_URL} target="_blank" rel="noopener noreferrer" onClick={onClose} className="flex items-center gap-3 rounded-lg px-3 py-3 text-base text-stone-600 transition hover:bg-stone-100 hover:text-stone-950 dark:text-stone-300 dark:hover:bg-stone-800 dark:hover:text-stone-100">
+                <a href={JISUAI_URL} target="_blank" rel="noopener noreferrer" onClick={onClose} className="flex items-center gap-3 rounded-lg pl-5 pr-3 py-3 text-base text-stone-600 transition hover:bg-stone-100 hover:text-stone-950 dark:text-stone-300 dark:hover:bg-stone-800 dark:hover:text-stone-100">
                     <ExternalLink className="size-5" />
                     <span>极速AI</span>
                 </a>

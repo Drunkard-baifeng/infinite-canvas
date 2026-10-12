@@ -7,6 +7,7 @@ import { JISUAI_URL } from "@/constant/env";
 import { AppConfigModal } from "@/components/layout/app-config-modal";
 import { MobileNavDrawer } from "@/components/layout/mobile-nav-drawer";
 import { UserStatusActions } from "@/components/layout/user-status-actions";
+import { SidebarThemeToggle } from "@/components/layout/sidebar-theme-toggle";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import { useAgentStore } from "@/stores/use-agent-store";
@@ -37,7 +38,7 @@ export function AppSideNav() {
         <>
             {!hideSidebar ? (
                 <aside className={cn("z-20 flex shrink-0 flex-col border-b border-border bg-card transition-[width] duration-200 motion-reduce:transition-none md:h-full md:border-r md:border-b-0", collapsed ? "md:w-[76px]" : "md:w-60")}>
-                    <div className="flex min-h-0 flex-1 flex-col px-4 md:px-3">
+                    <div className="flex min-h-0 flex-1 flex-col px-4 md:px-3 md:pb-12">
                         <div className={cn("flex h-14 shrink-0 items-center justify-between md:h-20", collapsed ? "md:justify-center" : "md:px-3")}>
                             <Link to="/" aria-label={t("meta.title")} title={t("meta.title")} className="flex shrink-0 items-center gap-3 text-sm font-semibold leading-none tracking-tight text-foreground transition hover:text-primary">
                                 <span
@@ -73,8 +74,8 @@ export function AppSideNav() {
                                         aria-label={t(`navigation.${tool.slug}`)}
                                         title={collapsed ? t(`navigation.${tool.slug}`) : undefined}
                                         className={cn(
-                                            "flex shrink-0 items-center gap-3 rounded-lg px-3 py-2.5 text-sm leading-6 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px]",
-                                            collapsed && "justify-center",
+                                            "flex shrink-0 items-center gap-3 rounded-lg pr-3 py-2.5 text-sm leading-6 transition-colors focus-visible:outline-2 focus-visible:outline-offset-[-2px]",
+                                            collapsed ? "justify-center pl-3" : "pl-5",
                                             active
                                                 ? "bg-accent font-semibold text-accent-foreground"
                                                 : "text-muted-foreground hover:bg-muted hover:text-foreground",
@@ -85,14 +86,17 @@ export function AppSideNav() {
                                     </Link>
                                 );
                             })}
-                            <a href={JISUAI_URL} target="_blank" rel="noopener noreferrer" aria-label="极速AI" title="极速AI" className={cn("mt-2 flex shrink-0 items-center gap-3 rounded-lg px-3 py-2.5 text-sm leading-6 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground", collapsed && "justify-center")}>
-                                <ExternalLink className="size-4" />
+                            <a href={JISUAI_URL} target="_blank" rel="noopener noreferrer" aria-label="极速AI" title="极速AI" className={cn("mt-2 flex shrink-0 items-center gap-3 rounded-lg pr-3 py-2.5 text-sm leading-6 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground", collapsed ? "justify-center pl-3" : "pl-5")}>
+                                <ExternalLink className="size-[18px] shrink-0" />
                                 {!collapsed && <span>极速AI</span>}
                             </a>
                             <UserStatusActions variant="sidebar" collapsed={collapsed} showConfig={false} className="mt-3 border-t border-border pt-3" />
                         </nav>
+                        <div className="hidden shrink-0 border-t border-border pt-2 md:block">
+                            <SidebarThemeToggle collapsed={collapsed} />
+                        </div>
 
-                        <button type="button" onClick={toggleSidebar} aria-expanded={!collapsed} aria-label={t(collapsed ? "topNav.expandSidebar" : "topNav.collapseSidebar")} title={t(collapsed ? "topNav.expandSidebar" : "topNav.collapseSidebar")} className={cn("mb-3 hidden shrink-0 items-center gap-3 rounded-lg px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:flex", collapsed && "justify-center")}>
+                        <button type="button" onClick={toggleSidebar} aria-expanded={!collapsed} aria-label={t(collapsed ? "topNav.expandSidebar" : "topNav.collapseSidebar")} title={t(collapsed ? "topNav.expandSidebar" : "topNav.collapseSidebar")} className={cn("hidden shrink-0 items-center gap-3 rounded-lg pr-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground md:flex", collapsed ? "justify-center pl-3" : "pl-5")}>
                             {collapsed ? <PanelLeftOpen className="size-[18px]" /> : <PanelLeftClose className="size-[18px]" />}
                             {!collapsed && <span>{t("topNav.collapseSidebar")}</span>}
                         </button>

@@ -1,12 +1,12 @@
 import type { CSSProperties } from "react";
 import { Tooltip } from "antd";
-import { BookOpen, Bot, Keyboard, Languages, Moon, Puzzle, Settings2, Sun, Info, MessageCircle } from "lucide-react";
+import { BookOpen, Bot, Keyboard, Languages, Puzzle, Settings2, Info } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
 import { VersionReleaseModal } from "@/components/layout/version-release-modal";
-import { CONTACT_QQ, DOCS_URL } from "@/constant/env";
-import { useCopyText } from "@/hooks/use-copy-text";
+import { DOCS_URL } from "@/constant/env";
+
 import { changeAppLocale, type AppLocale } from "@/i18n";
 import { canvasThemes } from "@/lib/canvas-theme";
 import { useConfigStore } from "@/stores/use-config-store";
@@ -25,7 +25,7 @@ type UserStatusActionsProps = {
 
 export function UserStatusActions({ className = "", showConfig = true, variant = "default", collapsed = false, onOpenShortcuts, onOpenPlugins }: UserStatusActionsProps) {
     const { i18n, t } = useTranslation();
-    const copyText = useCopyText();
+
     const theme = useThemeStore((state) => state.theme);
     const setTheme = useThemeStore((state) => state.setTheme);
     const openConfigDialog = useConfigStore((state) => state.openConfigDialog);
@@ -40,9 +40,9 @@ export function UserStatusActions({ className = "", showConfig = true, variant =
     const languageLabel = t("topNav.switchLanguage", { language: t(nextLocale === "zh-CN" ? "locale.zhCN" : "locale.enUS") });
 
     if (variant === "sidebar") {
-        const rowClass = `flex w-full shrink-0 cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-left text-sm leading-6 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-[-2px] [&_svg]:size-[18px] [&_svg]:shrink-0 ${collapsed ? "justify-center" : ""}`;
+        const rowClass = `flex w-full shrink-0 cursor-pointer items-center gap-3 rounded-lg pr-3 py-2 text-left text-sm leading-6 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-[-2px] [&_svg]:size-[18px] [&_svg]:shrink-0 ${collapsed ? "justify-center pl-3" : "pl-5"}`;
         const agentLabel = t(panelOpen ? "topNav.closeAgent" : "topNav.openAgent");
-        const themeLabel = t(theme === "dark" ? "topNav.lightTheme" : "topNav.darkTheme");
+
         return (
             <div className={`flex shrink-0 flex-col gap-1 ${className}`}>
                 <button type="button" className={rowClass} onClick={togglePanel} aria-label={agentLabel} aria-pressed={panelOpen} title={agentLabel}>
@@ -51,15 +51,9 @@ export function UserStatusActions({ className = "", showConfig = true, variant =
                 <button type="button" className={rowClass} onClick={() => void changeAppLocale(nextLocale)} aria-label={languageLabel} title={languageLabel}>
                     <Languages />{!collapsed && <span>{languageLabel}</span>}
                 </button>
-                <AnimatedThemeToggler theme={theme} onThemeChange={setTheme} className={rowClass} aria-label={themeLabel} title={themeLabel}>
-                    {theme === "dark" ? <Sun /> : <Moon />}{!collapsed && <span>{themeLabel}</span>}
-                </AnimatedThemeToggler>
                 <VersionReleaseModal className={rowClass}>
                     <Info />{!collapsed && <span>{APP_VERSION}</span>}
                 </VersionReleaseModal>
-                <button type="button" className={rowClass} onClick={() => copyText(CONTACT_QQ)} title={t("topNav.contact", { qq: CONTACT_QQ })} aria-label={t("topNav.contact", { qq: CONTACT_QQ })}>
-                    <MessageCircle />{!collapsed && <span className="text-xs">QQ · {CONTACT_QQ}</span>}
-                </button>
             </div>
         );
     }
