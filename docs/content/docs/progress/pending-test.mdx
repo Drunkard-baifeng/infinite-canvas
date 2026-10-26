@@ -5,6 +5,12 @@ description: Implemented changes that still need manual verification
 
 # Pending Tests
 
+- v1.0.2 release: verify the app version and release notes, Release ZIP and Docker v1.0.2/latest images. On the deployed version, repeat full-size image previews and navigate away and back during image generation.
+
+- Image workbench route changes: start multi-image generation, switch to video/assets/canvas and return before completion; prompt, reference order, elapsed time, pending slots and partial results should remain. Complete generation while away and verify results/logs appear on return without another request. Repeat with failed-slot retries and Agent-triggered generation; starting a new session or selecting history during generation should retain the active task and show the busy message. This retains state within the current tab across client-side routes; refreshing or closing the tab does not resume an in-flight image request.
+
+- Image workbench preview resources: with many generation logs, repeatedly open and close different full-size results, then switch records and pages. Verify the preview DOM is removed on close, temporary blob URLs are revoked, and memory does not grow continuously after collection. History should load thumbnails without restoring every original; verify original-resolution downloads, adding results to assets/references, and reference-based generation after refreshing. Browser crash reproduction and server deployment remain pending manual verification.
+
 - v1.0.1 release: verify the UI version, release notes, Release ZIP and Docker v1.0.1/latest images include the sidebar and default channel changes.
 
 - Sidebar footer: verify QQ is absent and theme switching stays above collapse while the menu scrolls. Verify 48px desktop bottom padding and menu icons and labels shifted right together by 8px with their original spacing. Collapsed mode retains centered icons and tooltips; the mobile drawer has a theme switch in its footer.

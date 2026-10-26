@@ -146,6 +146,8 @@ export async function resolveImageUrl(storageKey?: string, fallback = "") {
     if (cached) return cached;
     const blob = await store.getItem<Blob>(storageKey);
     if (!blob) return fallback;
+    const existing = objectUrls.get(storageKey);
+    if (existing) return existing;
     const url = URL.createObjectURL(blob);
     objectUrls.set(storageKey, url);
     return url;
@@ -177,7 +179,10 @@ export async function ensureImagePreview(storageKey?: string) {
     const cached = previewUrls.get(storageKey);
     if (cached) return cached;
     const stored = await previewStore.getItem<StoredImagePreview>(storageKey).catch(() => null);
-    if (stored?.version === IMAGE_PREVIEW_VERSION) return stored.blob ? cacheImagePreview(storageKey, stored.blob) : undefined;
+    if (stored?.version === IMAGE_PREVIEW_VERSION) {
+        const blob = stored.blob || (await getImageBlob(storageKey));
+        return blob ? cacheImagePreview(storageKey, blob) : undefined;
+    }
     queueImagePreview(storageKey);
     return undefined;
 }
@@ -195,10 +200,13 @@ function queueImagePreview(storageKey: string) {
 async function storeImagePreview(storageKey: string, original: Blob) {
     const preview = await createImageThumbnail(original).catch(() => undefined);
     await previewStore.setItem<StoredImagePreview>(storageKey, { version: IMAGE_PREVIEW_VERSION, blob: preview }).catch(() => undefined);
-    return preview ? cacheImagePreview(storageKey, preview) : undefined;
+    // Images already within the preview dimensions can use their original blob.
+    return cacheImagePreview(storageKey, preview || original);
 }
 
 function cacheImagePreview(storageKey: string, preview: Blob) {
+    const cached = previewUrls.get(storageKey);
+    if (cached) return cached;
     const url = URL.createObjectURL(preview);
     previewUrls.set(storageKey, url);
     previewRevision += 1;
